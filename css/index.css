@@ -1,0 +1,103 @@
+/* ============ Custom Fonts ============ */
+
+@font-face {
+    font-family: sunshine;
+    src: url('../font/sunshine.ttf');
+}
+@font-face {
+    font-family: always;
+    src: url('../font/always.ttf');
+}
+@font-face {
+    font-family: yellow;
+    src: url('../font/yellow.otf');
+}
+@font-face {
+    font-family: JennaSue;
+    src: url('../font/JennaSue.ttf');
+}
+
+/* ============ Fix Materialize ============ */
+
+.row {
+  margin-bottom: 0;
+}
+
+/* ============ Header ============ */
+
+header {
+  background-image: url('../img/header.jpeg');
+  background-position: center center;
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
+}
+header div.container {
+  padding: 1% 0 3.7% 0;
+  text-align: center;
+}
+header div.container img {
+  max-width: 100%;  /* To use logo can resize automatically */
+}
+header div.container div {
+  margin: 1% 0;
+}
+.header-text {
+  font-family: yellow;
+  font-weight: bolder;
+  font-size: 2.6em;
+  color: #896e6f;
+}
+@media screen and (max-width: 600px) {
+  header div.container div {
+    margin: 2% 0;
+    text-align: center!important;
+  }
+  header div.container {
+    padding-bottom: 15%;
+  }
+  .header-text {
+    font-size: 1.6em;
+  }
+}
+
+
+/* ============ Main ============ */
+
+main div.container {
+  padding: 3% 0;
+}
+
+main div.suggest {
+  font-family: sunshine;
+  font-size: 2.6em;
+  font-weight: bolder;
+  padding-left: 3%;
+  border-bottom: 1px solid #000;
+  margin-bottom: 2%;
+}
+
+@media screen and (max-width: 600px) {
+  main div.container {
+    padding: 7% 0;
+  }
+  main div.suggest {
+    font-size: 1.6em;
+    margin-bottom: 4%;
+  }
+}
+
+/* ============ Footer ============ */
+
+footer {
+  background-color: #000;
+  color : #FFF;
+}
+footer div.container {
+  padding: 2.5% 0;
+}
+
+@media screen and (max-width: 600px) {
+  footer div.container {
+    padding: 6% 0;
+  }
+}

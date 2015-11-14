@@ -1,0 +1,13 @@
+.cakeList {
+  cursor: pointer;
+}
+.card-image-cake {
+  height: 400px;
+  background-size: cover;
+  background-position: center center;
+}
+@media screen and (max-width: 600px) {
+  .card-image-cake {
+    height: 150px;
+  }
+}

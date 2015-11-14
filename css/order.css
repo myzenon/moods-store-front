@@ -1,0 +1,62 @@
+.name-cake {
+  font-size: 3.5em;
+  font-weight: bolder;
+  margin-bottom: 1%;
+  font-family: JennaSue;
+}
+.card-content .row {
+  margin: 2% 3%;
+}
+.button-cake {
+  padding: 2.5% 0;
+  text-align: right;
+}
+.button-cake div:first-child {
+  text-align: left;
+}
+.image-cake {
+  background-size: cover;
+  background-position: center center;
+}
+.chip {
+  color : white;
+}
+@media screen and (min-width: 600px) {
+  .frame-cake {
+    display: flex;
+  }
+  .frame-image-cake {
+    padding: 0!important;
+    display: flex;
+    align-items: stretch;
+  }
+  .image-cake {
+    width: 100%;
+    align-items: stretch;
+  }
+}
+@media screen and (max-width: 992px) {
+  .button-cake {
+    text-align: center;
+  }
+  .button-cake div:first-child {
+    text-align: center;
+  }
+  .button-cake div {
+    margin: 1%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .card-content .row {
+    margin: 2% 0%;
+  }
+  .image-cake {
+    height: 250px;
+  }
+}
+/* ============ Fix Materialize ========== */
+.input-field .prefix ~ input, .input-field .prefix ~ textarea , .input-field .prefix ~ div.select-wrapper {
+  margin-left: 3rem;
+  width: 92%;
+  width: calc(100% - 3rem);
+}

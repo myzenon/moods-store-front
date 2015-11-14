@@ -1,0 +1,13 @@
+<div class="row suggest">{ STEP 1 } - SELECT YOUR CAKE</div>
+<div class="row">
+  <div class="col s12 m4 l3" ng-repeat="cake in cakeLists">
+    <div class="card hoverable cakeList" ng-click="selectCake(cake.id)" >
+      <div class="card-image">
+        <div class="card-image-cake" ng-style="{'background-image':'url('+ cake.image + ')'}"></div>
+      </div>
+      <div class="card-content">
+        {{ cake.name }}
+      </div>
+    </div>
+  </div>
+</div>

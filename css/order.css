@@ -19,7 +19,7 @@
   background-position: center center;
 }
 .chip {
-  color : white;
+  color : #FFF;
 }
 @media screen and (min-width: 600px) {
   .frame-cake {

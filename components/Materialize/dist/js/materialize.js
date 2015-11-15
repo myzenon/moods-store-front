@@ -2878,8 +2878,20 @@ $(document).ready(function(){
       var selectOptions = $select.children('option');
       var selectOptGroups = $select.children('optgroup');
 
-      var valuesSelected = [],
-          optionsHover = false;
+      // var valuesSelected = [],
+			// Fix bug by zenon
+			if(multiple) {
+				var valuesSelected = [];
+				jQuery.each($select.find('option:selected'), function (i, val) {
+					if($(val).index() != 0) {
+						valuesSelected.push($(val).index());
+					}
+				});
+			}
+			else {
+				var valuesSelected = [];
+			}
+    	var optionsHover = false;
 
       if ($select.find('option:selected').length > 0) {
         label = $select.find('option:selected');
@@ -2969,7 +2981,16 @@ $(document).ready(function(){
         dropdownIcon.addClass('disabled');
 
       // escape double quotes
-      var sanitizedLabelHtml = label.html() && label.html().replace(/"/g, '&quot;');
+			// Fix bug by zenon
+			if(multiple) {
+				var sanitizedLabelHtml = '';
+				jQuery.each(label, function(i, val) {
+	        i === 0 ? sanitizedLabelHtml += $(val).text() : sanitizedLabelHtml += ', ' + $(val).text();
+				});
+			}
+			else {
+				var sanitizedLabelHtml = label.html() && label.html().replace(/"/g, '&quot;');
+			}
 
       var $newSelect = $('<input type="text" class="select-dropdown" readonly="true" ' + (($select.is(':disabled')) ? 'disabled' : '') + ' data-activates="select-options-' + uniqueID +'" value="'+ sanitizedLabelHtml +'"/>');
       $select.before($newSelect);
@@ -3132,12 +3153,10 @@ $(document).ready(function(){
     }
 
     function setValueToInput(entriesArray, select) {
-
       var value = '';
 
       for (var i = 0, count = entriesArray.length; i < count; i++) {
         var text = select.find('option').eq(entriesArray[i]).text();
-
         i === 0 ? value += text : value += ', ' + text;
       }
 
@@ -3500,9 +3519,10 @@ $(document).ready(function(){
 }( jQuery ));;(function ($) {
   $(document).ready(function() {
 
-    $(document).on('click.chip', '.chip .material-icons', function (e) {
-      $(this).parent().remove();
-    });
+		// Fix by zenon : doesn't like it
+    // $(document).on('click.chip', '.chip .material-icons', function (e) {
+    //   $(this).parent().remove();
+    // });
 
   });
 }( jQuery ));;(function ($) {

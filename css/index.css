@@ -5,10 +5,6 @@
     src: url('../font/sunshine.ttf');
 }
 @font-face {
-    font-family: always;
-    src: url('../font/always.ttf');
-}
-@font-face {
     font-family: yellow;
     src: url('../font/yellow.otf');
 }

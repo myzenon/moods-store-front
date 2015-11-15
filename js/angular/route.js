@@ -13,6 +13,14 @@ angular.module('MoodsApp')
         templateUrl : 'templates/code.html',
         controller : 'CodeCtrl'
       })
+      .when('/checkOrder', {
+        templateUrl : 'templates/checkOrder.html',
+        controller : 'CheckOrderCtrl'
+      })
+      .when('/checkOrder/:id', {
+        templateUrl : 'templates/checkOrderID.html',
+        controller : 'CheckOrderIDCtrl'
+      })
       .otherwise({ redirectTo: '/' })
     ;
   })

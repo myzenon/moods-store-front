@@ -1,0 +1,17 @@
+.headeri-checkOrder i {
+  margin-top: -10px;
+  font-size: 10em;
+  color: #80cbc4;
+}
+.header-checkOrder {
+  margin-top: -10px;
+  font-size: 1.7em;
+}
+.input-checkOrder {
+  width: 65%!important;
+  text-align: center;
+}
+.blockquote-checkOrderID {
+  padding: 20px 20px;
+  background-color: #fafafa;
+}

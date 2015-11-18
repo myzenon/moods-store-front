@@ -1,0 +1,54 @@
+<html ng-app="MoodsLogin">
+<head>
+  <title>Moods Store - Control Panel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <script src="../components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="../components/angular/angular.min.js" charset="utf-8"></script>
+  <script src="../components/ngstorage/ngStorage.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../components/Materialize/dist/css/materialize.min.css" charset="utf-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css" title="no title" charset="utf-8">
+</head>
+<body>
+  <div class="container" style="margin-top: 20%;">
+    <div class="row">
+      <div class="card col s12 offset-m3 m6 center-align" ng-controller="LoginCtrl">
+        <div class="card-content">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">person_pin</i>
+              <input type="text">
+              <label>Username</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">vpn_key</i>
+              <input type="password">
+              <label>Password</label>
+            </div>
+            <div class="input-field col s12">
+              <button class="btn" ng-click="buttonLogin()">Login !!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../components/Materialize/dist/js/materialize.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    angular.module('MoodsLogin', ['ngStorage'])
+      .config(function ($localStorageProvider) {
+        if($localStorageProvider.get('login_token')) {
+          location.href = 'index.html';
+        }
+      })
+      .controller('LoginCtrl', function ($scope, $localStorage) {
+        $scope.buttonLogin = function () {
+          $localStorage.login_token = { val : 'somethings'};
+          location.href = 'index.html';
+        };
+      })
+    ;
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<ul class="collapsible popout" data-collapsible="accordion">
+  <li ng-repeat="order in orderList">
+    <div class="collapsible-header"><i class="material-icons">{{ status[order.status].icon }}</i>{{ cake[order.cake].name }} - <small>({{ order.date }})</small><span class="right"><small>{{ status[order.status].name }}</small></span></div>
+    <div class="collapsible-body">
+      <div style="padding: 2rem;">
+        <table class="striped">
+          <tbody>
+            <tr>
+              <td class="right-align">Cake :</td>
+              <td>{{ cake[order.cake].name }}</td>
+            </tr>
+            <tr>
+              <td class="right-align">Date of Pick up :</td>
+              <td>{{ order.date }}</td>
+            </tr>
+            <tr>
+              <td class="right-align">Name :</td>
+              <td>{{ order.name }}</td>
+            </tr>
+            <tr>
+              <td class="right-align">Phone Number :</td>
+              <td>{{ order.phone }}</td>
+            </tr>
+            <tr>
+              <td class="right-align">Size of cake :</td>
+              <td>{{ order.size }} Pounds</td>
+            </tr>
+            <tr>
+              <td class="right-align">Topping : </td>
+              <td>{{ order.topping | topping }}</td>
+            </tr>
+            <tr>
+              <td class="right-align">Especially need : </td>
+              <td>{{ order.need }}</td>
+            </tr>
+            <tr>
+              <td class="right-align">Allergic : </td>
+              <td>{{ order.allergic }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </li>
+</ul>

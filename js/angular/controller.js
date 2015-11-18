@@ -34,12 +34,17 @@ angular.module('MoodsApp')
       $location.path('/checkOrder');
     }
     // If we found input
-    $scope.cake = cakeLists[0];
-
-    $scope.info = {"name":"Test","phone":"2356","date":"06/11/2015","need":"54356","allergic":"5646456","size":"2","topping":["macaroons","strawberries"], "status": 1};
+    $scope.info = {"cake" : 2, "name":"Test","phone":"2356","date":"06/11/2015","need":"54356","allergic":"5646456","size":"2","topping":["macaroons","strawberries"], "status": 1};
+    $scope.cake = cakeLists[$scope.info.cake];
 
     // $watchCollection for showing ; production will be $watch
     $scope.$watchCollection('info', function() {
+      if($scope.info.status == 1) {
+        $('i.prefix').addClass('active');
+      }
+      else {
+        $('i.prefix').removeClass('active');
+      }
       $('select').material_select();
       $timeout(function () {
         $('select').material_select('destroy');
@@ -69,10 +74,17 @@ angular.module('MoodsApp')
       {name : 'Canceled', icon : 'cancel'}
     ];
 
+
     // For the test
-    $scope.testButton = function() {
+    $scope.updateOrder = function() {
       $scope.info.status++;
     };
+
+    $scope.deleteOrder = function() {
+      if(confirm('Do you want to delete this order ?')) {
+        $location.path('/');
+      }
+    }
 
   })
 ;

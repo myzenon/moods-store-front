@@ -1,0 +1,42 @@
+<html ng-app="MoodsApp">
+<head>
+  <title>Moods Store - Control Panel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <script src="../components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="../components/angular/angular.min.js" charset="utf-8"></script>
+  <script src="../components/angular-route/angular-route.min.js" charset="utf-8"></script>
+  <script src="../components/ngstorage/ngStorage.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../components/Materialize/dist/css/materialize.min.css" charset="utf-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css" charset="utf-8">
+</head>
+<body>
+  <header>
+    <nav class="blue-grey darken-3" ng-controller="MenuCtrl">
+      <div class="nav-wrapper container">
+        <ul class="left">
+          <li ng-class="{ 'active' : menuNow == 1 }"><a href="#/" ng-click="activeMenu(1)">Order List</a></li>
+          <li ng-class="{ 'active' : menuNow == 2 }"><a href="#/summary" ng-click="activeMenu(2)">Summary</a></li>
+        </ul>
+        <ul class="right">
+          <li>
+            <a href="#" ng-click="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <ng-view></ng-view>
+    </div>
+  </main>
+  <script src="../components/Materialize/dist/js/materialize.js" charset="utf-8"></script>
+  <script src="js/angular/app.js" charset="utf-8"></script>
+  <script src="js/angular/config.js" charset="utf-8"></script>
+  <script src="js/angular/route.js" charset="utf-8"></script>
+  <script src="js/angular/controller.js" charset="utf-8"></script>
+  <script src="js/angular/filter.js" charset="utf-8"></script>
+</body>
+</html>

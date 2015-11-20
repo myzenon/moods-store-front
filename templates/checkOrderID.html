@@ -1,6 +1,6 @@
 <div class="row card frame-cake">
   <div class="col s12 m4 frame-image-cake">
-    <div class="image-cake" ng-style="{'background-image':'url('+ cake.image + ')'}"></div>
+    <div class="image-cake" ng-style="{'background-image':'url('+ cake.profilePicture + ')'}"></div>
   </div>
   <div class="col s12 m8 card-content">
       <div class="row">
@@ -9,38 +9,38 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">contacts</i>
-          <input id="name" type="text" ng-disabled="info.status != 1" ng-model="info.name">
+          <input id="name" type="text" ng-disabled="info.status != 0" ng-model="info.name">
           <label for="name">Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">contact_phone</i>
-          <input id="phone" type="text" ng-disabled="info.status != 1" length="10" ng-model="info.phone">
+          <input id="phone" type="text" ng-disabled="info.status != 0" length="10" ng-model="info.phoneNumber">
           <label for="phone">Phone Number</label>
         </div>
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">alarm</i>
-          <input id="date" type="text" ng-disabled="info.status != 1" class="datepicker" ng-model="info.date">
+          <input id="date" type="text" ng-disabled="info.status != 0" class="datepicker" ng-model="info.pickupDate">
           <label for="date">Date of Pick up</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">extension</i>
-          <textarea id="need" class="materialize-textarea" ng-disabled="info.status != 1" ng-model="info.need"></textarea>
+          <textarea id="need" class="materialize-textarea" ng-disabled="info.status != 0" ng-model="info.specialNeed"></textarea>
           <label for="need">Especially need ?</label>
         </div>
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">flash_off</i>
-          <textarea id="allergic" class="materialize-textarea" ng-disabled="info.status != 1" ng-model="info.allergic"></textarea>
+          <textarea id="allergic" class="materialize-textarea" ng-disabled="info.status != 0" ng-model="info.allergic"></textarea>
           <label for="allergic">Allergic ?</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">cake</i>
-          <select ng-model="info.size" ng-disabled="info.status != 1">
+          <select ng-model="info.size" ng-disabled="info.status != 0">
             <option value="" disabled selected>Choose your size</option>
             <option value="1">1 Pound</option>
             <option value="2">2 Pounds</option>
@@ -50,7 +50,7 @@
         </div>
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">whatshot</i>
-          <select id="test" ng-model="info.topping" ng-disabled="info.status != 1" multiple>
+          <select id="test" ng-model="info.topping" ng-disabled="info.status != 0" multiple>
             <option value="" disabled selected>Choose your topping</option>
             <option value="macaroons">Macaroons</option>
             <option value="strawberries">Fresh Strawberries</option>
@@ -61,11 +61,11 @@
       <div class="row">
         <div class="col s12">
           <blockquote class="blockquote-checkOrderID">
-            <strong>STATUS :</strong> {{ status[info.status - 1].name }}<i class="material-icons right">{{ status[info.status - 1].icon }}</i>
+            <strong>STATUS :</strong> {{ status[info.status].name }}<i class="material-icons right">{{ status[info.status].icon }}</i>
           </blockquote>
         </div>
       </div>
-      <div class="row button-cake" ng-show="info.status == 1">
+      <div class="row button-cake" ng-show="info.status == 0">
         <div class="col s12 l4">
           &nbsp;
           <div class="chip light-green darken-3" ng-show="sucess">

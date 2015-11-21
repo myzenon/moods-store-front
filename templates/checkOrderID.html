@@ -9,38 +9,38 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">contacts</i>
-          <input id="name" type="text" ng-disabled="info.status != 0" ng-model="info.name">
+          <input id="name" type="text" ng-disabled="info.status != 'Pending'" ng-model="info.name">
           <label for="name">Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">contact_phone</i>
-          <input id="phone" type="text" ng-disabled="info.status != 0" length="10" ng-model="info.phoneNumber">
+          <input id="phone" type="text" ng-disabled="info.status != 'Pending'" length="10" maxlength="12" ng-model="info.phoneNumber">
           <label for="phone">Phone Number</label>
         </div>
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">alarm</i>
-          <input id="date" type="text" ng-disabled="info.status != 0" class="datepicker" ng-model="info.pickupDate">
+          <input id="date" type="text" ng-disabled="info.status != 'Pending'" class="datepicker" ng-model="info.pickupDate">
           <label for="date">Date of Pick up</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">extension</i>
-          <textarea id="need" class="materialize-textarea" ng-disabled="info.status != 0" ng-model="info.specialNeed"></textarea>
+          <textarea id="need" class="materialize-textarea" ng-disabled="info.status != 'Pending'" ng-model="info.specialNeed"></textarea>
           <label for="need">Especially need ?</label>
         </div>
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">flash_off</i>
-          <textarea id="allergic" class="materialize-textarea" ng-disabled="info.status != 0" ng-model="info.allergic"></textarea>
+          <textarea id="allergic" class="materialize-textarea" ng-disabled="info.status != 'Pending'" ng-model="info.allergic"></textarea>
           <label for="allergic">Allergic ?</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">cake</i>
-          <select ng-model="info.size" ng-disabled="info.status != 0">
+          <select ng-model="info.size" ng-disabled="info.status != 'Pending'">
             <option value="" disabled selected>Choose your size</option>
             <option value="1">1 Pound</option>
             <option value="2">2 Pounds</option>
@@ -50,10 +50,10 @@
         </div>
         <div class="input-field col s12 m6">
           <i class="material-icons prefix">whatshot</i>
-          <select id="test" ng-model="info.topping" ng-disabled="info.status != 0" multiple>
+          <select id="test" ng-model="info.topping" ng-disabled="info.status != 'Pending'" multiple>
             <option value="" disabled selected>Choose your topping</option>
-            <option value="macaroons">Macaroons</option>
-            <option value="strawberries">Fresh Strawberries</option>
+            <option value="Macaroons">Macaroons</option>
+            <option value="Strawberries">Fresh Strawberries</option>
           </select>
           <label>Topping</label>
         </div>
@@ -61,27 +61,18 @@
       <div class="row">
         <div class="col s12">
           <blockquote class="blockquote-checkOrderID">
-            <strong>STATUS :</strong> {{ status[info.status].name }}<i class="material-icons right">{{ status[info.status].icon }}</i>
+            <strong>STATUS :</strong> {{ statusEnum[info.status].name }}<i class="material-icons right">{{ statusEnum[info.status].icon }}</i>
           </blockquote>
         </div>
       </div>
-      <div class="row button-cake" ng-show="info.status == 0">
+      <div class="row button-cake" ng-show="info.status == 'Pending'">
         <div class="col s12 l4">
           &nbsp;
-          <div class="chip light-green darken-3" ng-show="sucess">
-              {{ sucess }}
-            <i class="material-icons">check</i>
-          </div>
-          <div class="chip pink darken-1" ng-show="error">
-              {{ error }}
-            <i class="material-icons">error</i>
-          </div>
         </div>
         <div class="col s12 l8">
           <button class="btn" ng-click="deleteOrder()"><i class="material-icons left">delete</i>Delete</button>
           <button class="btn" ng-click="updateOrder()"><i class="material-icons left">rotate_right</i>Update</button>
         </div>
       </div>
-      {{ info }}
 </div>
 <script src="js/checkOrderID.js" charset="utf-8"></script>

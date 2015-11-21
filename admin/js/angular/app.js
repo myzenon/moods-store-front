@@ -1,26 +1,21 @@
-angular.module('MoodsApp', ['ngRoute','ngStorage']);
-
-var cakeLists = [
-  {
-    id : 1,
-    price : 100,
-    image : 'img/cake/sample1.jpg',
-    name : 'Berry Cake'
-  },{
-    id : 2,
-    price : 200,
-    image : 'img/cake/sample2.jpg',
-    name : 'Pine Cake'
-  },{
-    id : 3,
-    price : 250,
-    image : 'img/cake/sample3.jpg',
-    name : 'Apple Cake'
-  },{
-    id : 4,
-    price : 150,
-    image : 'img/cake/sample4.jpg',
-    name : 'StawBerry Cake'
-  }
-
-];
+angular.module('MoodsApp', ['ngRoute','ngStorage'])
+  .run(function ($rootScope, Order) {
+    $rootScope.getOrderLists = function (callback) {
+      Order.getOrder().success(function (data) {
+        $rootScope.orderLists = data;
+        callback();
+      });
+    };
+    $rootScope.statusEnum = {
+      'Pending' : {name : 'Pending ...', icon : 'timer', 'id' : 0},
+      'Accepted' : {name : 'Accepted', icon : 'check', 'id' : 1},
+      'ReadyToServe' : {name : 'Ready To Serve !!', icon : 'cake', 'id' : 2},
+      'Received' : {name : 'Received', icon : 'mood', 'id' : 3},
+      'Canceled' : {name : 'Canceled', icon : 'cancel', 'id' : 4}
+    };
+    $rootScope.timeStampToDate = function(timeStamp) {
+      var date = new Date(timeStamp);
+      return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    };
+  })
+;

@@ -1,17 +1,17 @@
 <ul class="collapsible popout" data-collapsible="accordion">
-  <li ng-repeat="order in orderList">
-    <div class="collapsible-header"><i class="material-icons">{{ status[order.status].icon }}</i>{{ cake[order.cake].name }} - <small>({{ order.date }})</small><span class="right"><small>{{ status[order.status].name }}</small></span></div>
+  <li ng-repeat="order in orderListsScope">
+    <div class="collapsible-header"><i class="material-icons">{{ statusEnum[order.status].icon }}</i>{{ order.cake.name }} - <small>({{ timeStampToDate(order.pickupDate) }})</small><span class="right"><small>{{ statusEnum[order.status].name }}</small></span></div>
     <div class="collapsible-body">
       <div style="padding: 2rem;">
         <table class="striped">
           <tbody>
             <tr>
               <td class="right-align">Cake :</td>
-              <td>{{ cake[order.cake].name }}</td>
+              <td>{{ order.cake.name }}</td>
             </tr>
             <tr>
               <td class="right-align">Date of Pick up :</td>
-              <td>{{ order.date }}</td>
+              <td>{{ timeStampToDate(order.pickupDate) }}</td>
             </tr>
             <tr>
               <td class="right-align">Name :</td>
@@ -19,7 +19,7 @@
             </tr>
             <tr>
               <td class="right-align">Phone Number :</td>
-              <td>{{ order.phone }}</td>
+              <td>{{ order.phoneNumber }}</td>
             </tr>
             <tr>
               <td class="right-align">Size of cake :</td>
@@ -31,19 +31,23 @@
             </tr>
             <tr>
               <td class="right-align">Especially need : </td>
-              <td>{{ order.need }}</td>
+              <td>{{ order.specialNeed }}</td>
             </tr>
             <tr>
               <td class="right-align">Allergic : </td>
               <td>{{ order.allergic }}</td>
             </tr>
             <tr>
+              <td class="right-align">Order ID : </td>
+              <td>{{ order.id }}</td>
+            </tr>
+            <tr>
               <td class="right-align">Change Status : </td>
               <td>
-                <button class="btn" ng-hide="order.status" ng-click="changeStatus(order.id, 1)"><i class="material-icons left">{{ status[1].icon }}</i>{{ status[1].name }}</button>
-                <button class="btn" ng-hide="order.status" ng-click="changeStatus(order.id, 4)"><i class="material-icons left">{{ status[4].icon }}</i>{{ status[4].name }}</button>
-                <button class="btn" ng-show="order.status == 1" ng-click="changeStatus(order.id, 2)"><i class="material-icons left">{{ status[2].icon }}</i>{{ status[2].name }}</button>
-                <button class="btn" ng-show="order.status == 2" ng-click="changeStatus(order.id, 3)"><i class="material-icons left">{{ status[3].icon }}</i>{{ status[3].name }}</button>
+                <button class="btn" ng-hide="order.status != 'Pending'" ng-click="changeStatus(order, 'Accepted')"><i class="material-icons left">{{ statusEnum['Accepted'].icon }}</i>{{ statusEnum['Accepted'].name }}</button>
+                <button class="btn" ng-hide="order.status != 'Pending'" ng-click="changeStatus(order, 'Canceled')"><i class="material-icons left">{{ statusEnum['Canceled'].icon }}</i>{{ statusEnum['Canceled'].name }}</button>
+                <button class="btn" ng-show="order.status == 'Accepted'" ng-click="changeStatus(order, 'ReadyToServe')"><i class="material-icons left">{{ statusEnum['ReadyToServe'].icon }}</i>{{ statusEnum['ReadyToServe'].name }}</button>
+                <button class="btn" ng-show="order.status == 'ReadyToServe'" ng-click="changeStatus(order, 'Received')"><i class="material-icons left">{{ statusEnum['Received'].icon }}</i>{{ statusEnum['Received'].name }}</button>
               </td>
             </tr>
           </tbody>

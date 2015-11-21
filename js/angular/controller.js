@@ -20,22 +20,20 @@ angular.module('MoodsApp')
     $scope.submitOrder = function() {
       var info = {};
       angular.copy($scope.info, info);
-      if(!info.topping) {
-        info.topping = [];
+      if(info.pickupDate) {
+        info.pickupDate = changeDate(info.pickupDate);
       }
-      for(var i = 0; i < info.topping.length; i++) {
-        info.topping[i] = info.topping[i].charAt(0).toUpperCase() + info.topping[i].slice(1);
-      }
-      if(!info.pickupDate) {
-        info.pickupDate = '0000-00-00';
-      }
-      info.pickupDate = changeDate(info.pickupDate);
-      info.cake = $scope.cake;
-      Order.makeOrder(info).success(function (data) {
+      Order.makeOrder($scope.cake.id,info).success(function (data) {
         $scope.changePath('/code/' + data.id);
       }).error(function (data) {
-        Materialize.toast(data[0].message, 4000);
-        $scope.error = data[0].message;
+        if(data instanceof Array) {
+          data.forEach(function(errorData) {
+            Materialize.toast(errorData.message, 4000);
+          });
+        }
+        else {
+          Materialize.toast(data.message, 4000);
+        }
       });
     };
     $rootScope.$watch('cakeLists', function() {
@@ -64,13 +62,13 @@ angular.module('MoodsApp')
     };
   })
   .controller('CheckOrderIDCtrl', function ($scope, $routeParams, $location, $timeout, $rootScope, Order) {
-    // $scope.info = {"cake" : 2, "name":"Test","phone":"2356","date":"06/11/2015","need":"54356","allergic":"5646456","size":"2","topping":["macaroons","strawberries"], "status": 1};
+
     var timeStampToDate = function(timeStamp) {
       var date = new Date(timeStamp);
       return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     };
 
-    changeDate = function(date) { // dd/mm/yyyy
+    var changeDate = function(date) { // dd/mm/yyyy
       var newDate = date.split('/');
       return newDate[2] + '-' + newDate[1] + '-' + newDate[0];
     };
@@ -80,16 +78,10 @@ angular.module('MoodsApp')
         $scope.info = data;
         $scope.cake = $scope.info.cake;
         $scope.info.pickupDate = timeStampToDate($scope.info.pickupDate);
-        if(!$scope.info.status) {
-          $scope.info.status = 0;
-        }
         $scope.info.size = $scope.info.size + '';
-        for(var i = 0; i < $scope.info.topping.length; i++) {
-          $scope.info.topping[i] = $scope.info.topping[i].toLowerCase();
-        }
         // $watchCollection for showing ; production will be $watch
         $scope.$watch('info', function() {
-          if($scope.info.status == 0) {
+          if($scope.info.status == 'Pending') {
             $('i.prefix').addClass('active');
           }
           else {
@@ -106,7 +98,7 @@ angular.module('MoodsApp')
                 }
               });
             });
-          }, 1000);
+          }, 10);
         });
       }
       else {
@@ -116,49 +108,39 @@ angular.module('MoodsApp')
       $location.path('/checkOrder');
     });
 
-    $scope.updateOrder = function() {
-      var info = {};
-      angular.copy($scope.info, info);
-      if(!info.topping) {
-        info.topping = [];
-      }
-      for(var i = 0; i < info.topping.length; i++) {
-        info.topping[i] = info.topping[i].charAt(0).toUpperCase() + info.topping[i].slice(1);
-      }
-      if(!info.pickupDate) {
-        info.pickupDate = '0000-00-00';
-      }
-      info.pickupDate = changeDate(info.pickupDate);
-      info.cake = $scope.cake;
-      Order.updateOrder(info).success(function (data) {
-        console.log(data);
-      }).error(function (data) {
-        console.log(data);
-      });
+    // $scope.updateOrder = function() {
+    //   var info = {};
+    //   angular.copy($scope.info, info);
+    //   if(!info.topping) {
+    //     info.topping = [];
+    //   }
+    //   for(var i = 0; i < info.topping.length; i++) {
+    //     info.topping[i] = info.topping[i].charAt(0).toUpperCase() + info.topping[i].slice(1);
+    //   }
+    //   if(!info.pickupDate) {
+    //     info.pickupDate = '0000-00-00';
+    //   }
+    //   info.pickupDate = changeDate(info.pickupDate);
+    //   info.cake = $scope.cake;
+    //   Order.updateOrder(info).success(function (data) {
+    //     console.log(data);
+    //   }).error(function (data) {
+    //     console.log(data);
+    //   });
+    // };
+
+    $scope.statusEnum = {
+      'Pending' : {name : 'Pending ...', icon : 'timer'},
+      'Accepted' : {name : 'Accepted', icon : 'check'},
+      'ReadyToServe' : {name : 'Ready To Serve !!', icon : 'cake'},
+      'Received' : {name : 'Received', icon : 'mood'},
+      'Canceled' : {name : 'Canceled', icon : 'cancel'}
     };
-
-
-    // If status more than 1 ; all input will be disabled
-    // $scope.info.status = 1;
-
-    // If we found error or sucess
-    $scope.sucess = 'sucess';
-    $scope.error = 'error';
-
-    $scope.status = [
-      {name : 'Pending ...', icon : 'timer'},
-      {name : 'Accepted', icon : 'check'},
-      {name : 'Ready To Serve !!', icon : 'cake'},
-      {name : 'Received', icon : 'mood'},
-      {name : 'Canceled', icon : 'cancel'}
-    ];
 
     $scope.deleteOrder = function() {
       if(confirm('Do you want to delete this order ?')) {
         Order.deleteOrder($scope.info.id).success(function (data) {
-          console.log(data);
-        }).error(function (data) {
-          console.log(data);
+          $location.path('/checkOrder');
         });
       }
     }

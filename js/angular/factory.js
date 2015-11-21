@@ -10,8 +10,8 @@ angular.module('MoodsApp')
   })
   .factory('Order', function OrderFactory($http) {
     return {
-      makeOrder : function(data) {
-        return $http.post(baseURL + '/orders', data);
+      makeOrder : function(cakeID, data) {
+        return $http.post(baseURL + '/orders/cake/' + cakeID + '/status/0', data);
       },
       getOrder : function(orderID) {
         return $http.get(baseURL + '/orders/' + orderID);

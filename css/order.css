@@ -18,9 +18,6 @@
   background-size: cover;
   background-position: center center;
 }
-.chip {
-  color : #FFF;
-}
 @media screen and (min-width: 600px) {
   .frame-cake {
     display: flex;
@@ -55,6 +52,7 @@
   }
 }
 /* ============ Fix Materialize ========== */
+
 .input-field .prefix ~ input, .input-field .prefix ~ textarea , .input-field .prefix ~ div.select-wrapper {
   margin-left: 3rem;
   width: 92%;

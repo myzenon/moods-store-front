@@ -7,9 +7,9 @@ angular.module('MoodsApp', ['ngRoute','ngStorage'])
       });
     };
     $rootScope.statusEnum = {
-      'Pending' : {name : 'Pending ...', icon : 'timer', 'id' : 0},
+      'Pending' : {name : 'Pending', icon : 'timer', 'id' : 0},
       'Accepted' : {name : 'Accepted', icon : 'check', 'id' : 1},
-      'ReadyToServe' : {name : 'Ready To Serve !!', icon : 'cake', 'id' : 2},
+      'ReadyToServe' : {name : 'Ready To Serve', icon : 'cake', 'id' : 2},
       'Received' : {name : 'Received', icon : 'mood', 'id' : 3},
       'Canceled' : {name : 'Canceled', icon : 'cancel', 'id' : 4}
     };
@@ -19,3 +19,4 @@ angular.module('MoodsApp', ['ngRoute','ngStorage'])
     };
   })
 ;
+var baseURL = 'http://hydrogen01.cloudapp.net/moods';

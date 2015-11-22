@@ -4,10 +4,9 @@ angular.module('MoodsApp')
       getOrder : function() {
         return $http.get(baseURL + '/orders/');
       },
-      updateOrder : function(data) {
-        return $http.put(baseURL + '/orders/', data);
-      },
+      updateOrderStatus : function(statusID, data) {
+        return $http.put(baseURL + '/orders/cake/' + data.cake.id + '/status/' + statusID, data);
+      }
     };
   })
 ;
-var baseURL = 'http://hydrogen01.cloudapp.net/moods';

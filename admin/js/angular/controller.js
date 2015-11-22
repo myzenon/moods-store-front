@@ -23,43 +23,42 @@ angular.module('MoodsApp')
         return orderA.pickupDate - orderB.pickupDate;
       });
     });
-
   })
-  .controller('OrderListCtrl', function($scope, $timeout, $rootScope, Order) {
+  .controller('OrderListCtrl', function($scope, $timeout, $interval, $rootScope, Order) {
     $rootScope.menuNow = 1;
-    $rootScope.getOrderLists(function () {
-      $timeout(function () {
-        $('.collapsible').collapsible({
-          accordion : false
+    var getOrderLists = function () {
+      $rootScope.getOrderLists(function () {
+        $timeout(function () {
+          $('.collapsible').collapsible({
+            accordion : false
+          });
+        },5);
+        var orderLists0 = $rootScope.orderLists.filter(function (order) {
+          return $rootScope.statusEnum[order.status].id == 0;
         });
-      },5);
-      var orderLists0 = $rootScope.orderLists.filter(function (order) {
-        return $rootScope.statusEnum[order.status].id == 0;
+        var orderLists1 = $rootScope.orderLists.filter(function (order) {
+          return $rootScope.statusEnum[order.status].id == 1;
+        });
+        var orderLists2 = $rootScope.orderLists.filter(function (order) {
+          return $rootScope.statusEnum[order.status].id == 2;
+        });
+        orderLists0.sort(function (orderA, orderB) {
+          return orderA.pickupDate - orderB.pickupDate;
+        });
+        orderLists1.sort(function (orderA, orderB) {
+          return orderA.pickupDate - orderB.pickupDate;
+        });
+        orderLists2.sort(function (orderA, orderB) {
+          return orderA.pickupDate - orderB.pickupDate;
+        });
+        $scope.orderListsScope = orderLists0.concat(orderLists1, orderLists2);
       });
-      var orderLists1 = $rootScope.orderLists.filter(function (order) {
-        return $rootScope.statusEnum[order.status].id == 1;
-      });
-      var orderLists2 = $rootScope.orderLists.filter(function (order) {
-        return $rootScope.statusEnum[order.status].id == 2;
-      });
-      orderLists0.sort(function (orderA, orderB) {
-        return orderA.pickupDate - orderB.pickupDate;
-      });
-      orderLists1.sort(function (orderA, orderB) {
-        return orderA.pickupDate - orderB.pickupDate;
-      });
-      orderLists2.sort(function (orderA, orderB) {
-        return orderA.pickupDate - orderB.pickupDate;
-      });
-      $scope.orderListsScope = orderLists0.concat(orderLists1, orderLists2);
-    });
+    };
+    getOrderLists();
+    $interval(getOrderLists, 60000);
     $scope.changeStatus = function (order, status) {
       order.status = status;
-      Order.updateOrder(order).success(function (data) {
-        console.log(data);
-      }).error(function (data) {
-        console.log(data);
-      });
+      Order.updateOrderStatus($rootScope.statusEnum[status].id, order);
     };
   })
 ;

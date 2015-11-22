@@ -10,3 +10,9 @@ body {
 .row {
   margin-bottom: 10px;
 }
+.card {
+  height: 250px;
+  position: absolute;
+  top: 50%;
+  margin-top: -135px;
+}

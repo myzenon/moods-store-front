@@ -17,7 +17,7 @@ angular.module('MoodsApp')
         return $http.get(baseURL + '/orders/' + orderID);
       },
       updateOrder : function(data) {
-        return $http.put(baseURL + '/orders/', data);
+        return $http.post(baseURL + '/orders/cake/' + data.cake.id + '/status/0', data);
       },
       deleteOrder : function(orderID) {
         return $http.delete(baseURL + '/orders/' + orderID)
@@ -25,4 +25,3 @@ angular.module('MoodsApp')
     };
   })
 ;
-var baseURL = 'http://hydrogen01.cloudapp.net/moods';

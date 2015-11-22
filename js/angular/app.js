@@ -5,3 +5,4 @@ angular.module('MoodsApp', ['ngRoute', 'angularSmoothscroll'])
     });
   })
 ;
+var baseURL = 'http://hydrogen01.cloudapp.net/moods';
